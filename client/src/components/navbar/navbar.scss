@@ -1,0 +1,31 @@
+@import "../../utills/theme/theme";
+.header{
+  background-color: $secondColor;
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+  &__logo{
+    position: relative;
+    top: 5px;
+  }
+  &__nav span{
+    color: $primaryColor;
+    font-weight: bold;
+  }
+  &__nav span:hover{
+    cursor: pointer;
+  }
+
+  &__nav a:first-child{
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .header__logo img{
+    width: 80%;
+  }
+}
