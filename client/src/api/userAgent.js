@@ -17,4 +17,10 @@ export const usersAPI = {
     }
 }
 
+export const filesAPI = {
+    getFiles(dir){
+        return instance.get(`files${dir?'?parent='+dir :''}`,{headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}}).then(response => response.data)
+    }
+}
+
 

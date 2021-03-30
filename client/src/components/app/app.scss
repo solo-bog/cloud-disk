@@ -1,36 +1,9 @@
 @import "../../utills/theme/theme";
+@import "./general";
 
-body{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-size: $baseFont;
-  font-family: $baseFontFamily;
-  color: $primaryColor;
-  background-color: $bgColor;
-}
 
-*{
-  box-sizing: inherit;
-}
-
-a{
-  text-decoration: none;
-  color: $primaryColor;
-  font-weight: bold;
-}
-
-.container{
-  padding: 0 10px;
-  margin: 0 auto;
-  max-width: 1300px;
-}
 .app{
   &__content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 70px);
-    overflow: hidden;
+    min-height: calc(100vh - 70px);
   }
 }

@@ -21,6 +21,7 @@ class FileController {
             return res.json(file)
         }catch (e) {
             console.log(e)
+            console.log("new")
             return res.status(400).json(e)
         }
     }

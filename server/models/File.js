@@ -7,6 +7,7 @@ const File = new Schema({
     size:{type:Number,default:0},
     path:{type:String, default:''},
     user:{type:ObjectId,ref:'User'},
+    date:{type:Date,default:Date.now()},
     parent:{type:ObjectId,ref:'File'},
     children:[{type:ObjectId,ref:'File'}]
 })

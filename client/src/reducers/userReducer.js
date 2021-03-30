@@ -3,9 +3,11 @@ import {FORM_ERROR} from "final-form";
 
 const SET_USER = 'SET_USER'
 const LOG_OUT = 'LOG_OUT'
+const TOGGLE_IS_INIT = 'TOGGLE_IS_INIT'
 const defaultState = {
     currentUser:{},
-    isAuth:false
+    isAuth:false,
+    isInit:false
 }
 
 export default function userReducer (state=defaultState,action) {
@@ -24,6 +26,11 @@ export default function userReducer (state=defaultState,action) {
                 isAuth: false,
                 currentUser: {}
             }
+        case TOGGLE_IS_INIT:
+            return {
+                ...state,
+                isInit: action.value
+            }
 
 
         default:
@@ -34,6 +41,7 @@ export default function userReducer (state=defaultState,action) {
 
 const setUser = (payload) =>({type:SET_USER,payload})
 export const logout = () =>({type:LOG_OUT})
+const toggleIsInit = (value) =>({type:TOGGLE_IS_INIT,value})
 
 
 export const login = (email,password) =>{
@@ -68,6 +76,7 @@ export const auth = () =>{
             console.log(e)
             localStorage.removeItem('token')
         }
+        dispatch(toggleIsInit(true))
     }
 }
 

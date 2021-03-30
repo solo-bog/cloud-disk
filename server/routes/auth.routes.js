@@ -29,7 +29,16 @@ router.post('/registration',
         const user = new User({email,password:hashPassword})
         await user.save()
         await fileService.createDir(new File({user:user.id,name:''}))
-        return res.json({message:"User was created"})
+        const token = jwt.sign({id:user.id},config.get('secretKey'),{expiresIn: "1h"})
+        return res.json({token,
+            user:{
+                id:user.id,
+                email:user.email,
+                diskSpace:user.diskSpace,
+                usedSpace:user.usedSpace,
+                avatar:user.avatar
+            },
+            message:"User was created"})
 
     }catch (e) {
         console.log(e)

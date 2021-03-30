@@ -1,0 +1,39 @@
+@import "../../utills/theme/theme";
+html{
+  font-size: $baseFont;
+  font-family: $baseFontFamily;
+}
+
+body{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: $primaryColor;
+  background-color: $bgColor;
+}
+
+*{
+  box-sizing: inherit;
+}
+h1{
+  margin: 0.5rem 0;
+}
+a{
+  text-decoration: none;
+  color: $primaryColor;
+  font-weight: bold;
+}
+img{
+  width: 100%;
+}
+.container{
+  padding: 0 10px;
+  margin: 0 auto;
+  max-width: 1300px;
+}
+
+@media only screen and (max-width: 776px) {
+  html{
+    font-size: $baseFont*0.7;
+  }
+}
