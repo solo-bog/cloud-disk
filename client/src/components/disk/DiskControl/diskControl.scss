@@ -9,6 +9,9 @@
     &:hover{
       cursor: pointer;
     }
+    @media only screen and (max-width: 480px) {
+      height: 1rem;
+    }
   }
   &__btn{
     display: inline-block;
@@ -23,6 +26,10 @@
       cursor: pointer;
       transform: translateY(2px);
     }
+    @media only screen and (max-width: 480px) {
+      padding: 5px;
+    }
+
   }
   &__sort{
     align-self: center;

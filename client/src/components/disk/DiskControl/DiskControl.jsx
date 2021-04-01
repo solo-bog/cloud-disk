@@ -4,8 +4,11 @@ import sortIcon from '../../../assets/img/sort_icon.svg';
 import listView from '../../../assets/img/list_view.svg';
 import tableView from '../../../assets/img/table_view.svg';
 import './diskControl.scss';
+import {useDispatch} from 'react-redux';
+import {setFilesView} from '../../../reducers/fileReducer';
 
-const DiskControl = (props) => {
+const DiskControl = () => {
+  const dispatch = useDispatch();
   return (
     <div className="disk-control">
       <div>
@@ -26,8 +29,8 @@ const DiskControl = (props) => {
 
 
       <div className='disk-control__view'>
-        <img className='disk-control__icon' src={listView}/>
-        <img className='disk-control__icon' src={tableView}/>
+        <img className='disk-control__icon' onClick={() => dispatch(setFilesView('list'))} src={listView}/>
+        <img className='disk-control__icon' onClick={() => dispatch(setFilesView('table'))} src={tableView}/>
 
       </div>
 

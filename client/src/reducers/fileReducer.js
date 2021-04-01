@@ -2,6 +2,7 @@ import {filesAPI} from '../api/userAgent';
 
 const SET_FILES = 'SET_FILES';
 const SET_CURRENT_DIR = 'SET_CURRENT_DIR';
+const SET_FILES_VIEW = 'SET_FILES_VIEW';
 const defaultState = {
   files: [],
   currentDir: null,
@@ -21,11 +22,17 @@ export const fileReducer = (state=defaultState, action) => {
         ...state,
         currentDir: action.payload,
       };
+    case SET_FILES_VIEW:
+      return {
+        ...state,
+        viewType: action.viewType,
+      };
     default: return state;
   }
 };
 
 const setFiles = (files) =>({type: SET_FILES, payload: files});
+export const setFilesView = (viewType) => ({type: SET_FILES_VIEW, viewType});
 // const setCurrentDir = (dir) =>({type: SET_CURRENT_DIR, payload: dir});
 
 export const loadFiles = (dirId) =>{

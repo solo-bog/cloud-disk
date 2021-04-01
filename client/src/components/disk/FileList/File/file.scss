@@ -1,19 +1,25 @@
 @import "../../../../utills/theme/theme";
 .file {
-  margin: 10px 0;
+  padding: 5px 0;
   border-bottom: solid 2px $primaryColor;
   display: grid;
-  grid-template-columns: 1fr 4fr repeat(4, 1fr);
+  grid-template-columns: 1fr 3fr repeat(2,1fr) 2fr 1fr;
   align-items: center;
-
   &:hover {
     transform: scale(0.99);
   }
   &__img {
     width: 60px;
     justify-self: center;
-  }
 
+    @media only screen and (max-width: 480px) {
+     width: 30px;
+    }
+  }
+  &__type {
+    grid-column-start: 4;
+    justify-self: center;
+  }
   &__date {
     grid-column-start: 5;
     justify-self: center;
@@ -23,3 +29,5 @@
     justify-self: center;
   }
 }
+
+

@@ -1,0 +1,35 @@
+@import "../../../utills/theme/theme";
+.file-list{
+  &__header{
+    display: grid;
+    grid-template-columns: 1fr 3fr repeat(2,1fr) 2fr 1fr;
+    padding: 20px 0 5px 0;
+    border-bottom:2px solid  $primaryColor;
+    &_name{
+      grid-column-start: 2;
+    }
+    &_type{
+      justify-self: center;
+      grid-column-start: 4;
+    }
+    &_date{
+      justify-self: center;
+      grid-column-start: 5;
+    }
+    &_size{
+      justify-self: center;
+      grid-column-start: 6;
+    }
+  }
+  &.table{
+    display: flex;
+    .file{
+      display: block;
+      flex-basis: 30px;
+      margin: 15px;
+      border: none;
+      text-align: center;
+    }
+  }
+
+}
