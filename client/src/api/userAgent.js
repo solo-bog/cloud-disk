@@ -30,6 +30,15 @@ export const filesAPI = {
     })
         .then((response) => response.data);
   },
+  createDir(parentDirId, name) {
+    return instance.post('files', {
+      name,
+      parent: parentDirId,
+      type: 'dir',
+    }, {
+      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+    }).then((response) => response.data);
+  },
 };
 
 

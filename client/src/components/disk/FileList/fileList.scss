@@ -23,9 +23,11 @@
   }
   &.table{
     display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     .file{
       display: block;
-      flex-basis: 30px;
+      flex-basis: 10%;
       margin: 15px;
       border: none;
       text-align: center;

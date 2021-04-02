@@ -16,6 +16,10 @@
      width: 30px;
     }
   }
+  &__name{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
   &__type {
     grid-column-start: 4;
     justify-self: center;

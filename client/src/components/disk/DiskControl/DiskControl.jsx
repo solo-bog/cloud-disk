@@ -4,17 +4,21 @@ import sortIcon from '../../../assets/img/sort_icon.svg';
 import listView from '../../../assets/img/list_view.svg';
 import tableView from '../../../assets/img/table_view.svg';
 import './diskControl.scss';
-import {useDispatch} from 'react-redux';
-import {setFilesView} from '../../../reducers/fileReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {setCurrentDir, setFilesView, setPopupDisplay} from '../../../reducers/fileReducer';
+import Popup from './Popup/Popup';
 
 const DiskControl = () => {
   const dispatch = useDispatch();
+  const isPopupDisplay = useSelector((state) => state.files.isPopupDisplay);
+  const currentDir = useSelector((state) => state.files.currentDir);
   return (
     <div className="disk-control">
       <div>
         <div className="disk-control__btn">
-          <img className='disk-control__icon' src={prevDirIcon} alt=""/>
+          <img className='disk-control__icon' src={prevDirIcon} alt="" onClick={currentDir?()=>dispatch(setCurrentDir(currentDir?.parent)) : null}/>
         </div>
+        <span>root\{currentDir}</span>
       </div>
 
       <div className='disk-control__sort'>
@@ -35,9 +39,9 @@ const DiskControl = () => {
       </div>
 
       <div>
-        <div className='disk-control__btn'>Create directory</div>
+        <div className='disk-control__btn' onClick={() => dispatch(setPopupDisplay(true))}>Create directory</div>
       </div>
-
+      {isPopupDisplay && <Popup/>}
 
     </div>
   );
