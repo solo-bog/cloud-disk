@@ -6,10 +6,13 @@ const SET_CURRENT_DIR = 'SET_CURRENT_DIR';
 const SET_FILES_VIEW = 'SET_FILES_VIEW';
 const SET_POPUP_DISPLAY = 'SET_POPUP_DISPLAY';
 const ADD_FILE = 'ADD_FILE';
+const DIR_STACK_PUSH = 'DIR_STACK_PUSH';
+const DIR_STACK_POP = 'DIR_STACK_POP';
 const defaultState = {
   files: [],
   currentDir: null,
-  prevCurrentDir: null,
+  dirStack: [],
+  dirPath: ['root'],
   sortBy: 'name',
   viewType: 'list',
   isPopupDisplay: false,
@@ -42,6 +45,18 @@ export const fileReducer = (state=defaultState, action) => {
         ...state,
         isPopupDisplay: action.display,
       };
+    case DIR_STACK_PUSH:
+      return {
+        ...state,
+        dirStack: [...state.dirStack, action.dir],
+        dirPath: [...state.dirPath, action.dirName],
+      };
+    case DIR_STACK_POP:
+      return {
+        ...state,
+        dirStack: state.dirStack.slice(0, state.dirStack.length-1),
+        dirPath: state.dirPath.slice(0, state.dirPath.length-1),
+      };
     default: return state;
   }
 };
@@ -51,6 +66,8 @@ const addFile = (file) =>({type: ADD_FILE, file});
 export const setPopupDisplay = (display) =>({type: SET_POPUP_DISPLAY, display});
 export const setFilesView = (viewType) => ({type: SET_FILES_VIEW, viewType});
 export const setCurrentDir = (dir) =>({type: SET_CURRENT_DIR, payload: dir});
+export const dirPush = (dir, dirName) =>({type: DIR_STACK_PUSH, dir, dirName});
+export const dirPop = () =>({type: DIR_STACK_POP});
 
 export const loadFiles = (dirId) =>{
   return async (dispatch) =>{

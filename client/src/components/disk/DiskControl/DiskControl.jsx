@@ -5,20 +5,25 @@ import listView from '../../../assets/img/list_view.svg';
 import tableView from '../../../assets/img/table_view.svg';
 import './diskControl.scss';
 import {useDispatch, useSelector} from 'react-redux';
-import {setCurrentDir, setFilesView, setPopupDisplay} from '../../../reducers/fileReducer';
+import {dirPop, setCurrentDir, setFilesView, setPopupDisplay} from '../../../reducers/fileReducer';
 import Popup from './Popup/Popup';
 
 const DiskControl = () => {
   const dispatch = useDispatch();
   const isPopupDisplay = useSelector((state) => state.files.isPopupDisplay);
-  const currentDir = useSelector((state) => state.files.currentDir);
+  const currenrDirPath = useSelector((state) => state.files.dirPath);
+  const dirStack = useSelector((state) => state.files.dirStack);
+  const openPrevDirHandler = () => {
+    dispatch(setCurrentDir(dirStack[dirStack.length-1]));
+    dispatch(dirPop());
+  };
   return (
     <div className="disk-control">
       <div>
         <div className="disk-control__btn">
-          <img className='disk-control__icon' src={prevDirIcon} alt="" onClick={currentDir?()=>dispatch(setCurrentDir(currentDir?.parent)) : null}/>
+          <img className='disk-control__icon' src={prevDirIcon} alt="" onClick={dirStack.length ? openPrevDirHandler: null}/>
         </div>
-        <span>root\{currentDir}</span>
+        <span>{currenrDirPath.join('/')}</span>
       </div>
 
       <div className='disk-control__sort'>
