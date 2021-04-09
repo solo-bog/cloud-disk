@@ -5,23 +5,32 @@ import listView from '../../../assets/img/list_view.svg';
 import tableView from '../../../assets/img/table_view.svg';
 import './diskControl.scss';
 import {useDispatch, useSelector} from 'react-redux';
-import {dirPop, setCurrentDir, setFilesView, setPopupDisplay} from '../../../reducers/fileReducer';
+import {dirPop, setCurrentDir, setFilesView, setPopupDisplay, uploadFile} from '../../../reducers/fileReducer';
 import Popup from './Popup/Popup';
 
 const DiskControl = () => {
   const dispatch = useDispatch();
   const isPopupDisplay = useSelector((state) => state.files.isPopupDisplay);
   const currenrDirPath = useSelector((state) => state.files.dirPath);
-  const dirStack = useSelector((state) => state.files.dirStack);
+  const currentDir = useSelector((state) => state.files.currentDir);
+  const prevDir = useSelector((state) => state.files.dirStack[state.files.dirStack.length-1]);
   const openPrevDirHandler = () => {
-    dispatch(setCurrentDir(dirStack[dirStack.length-1]));
-    dispatch(dirPop());
+    if (currentDir) {
+      dispatch(setCurrentDir(prevDir));
+      dispatch(dirPop());
+    }
+  };
+  const fileUploadHandler = (event) => {
+    const files = [...event.target.files];
+    files.forEach((file) => {
+      dispatch(uploadFile(file, currentDir));
+    });
   };
   return (
     <div className="disk-control">
       <div>
         <div className="disk-control__btn">
-          <img className='disk-control__icon' src={prevDirIcon} alt="" onClick={dirStack.length ? openPrevDirHandler: null}/>
+          <img className='disk-control__icon' src={prevDirIcon} alt="" onClick={openPrevDirHandler}/>
         </div>
         <span>{currenrDirPath.join('/')}</span>
       </div>
@@ -45,6 +54,7 @@ const DiskControl = () => {
 
       <div>
         <div className='disk-control__btn' onClick={() => dispatch(setPopupDisplay(true))}>Create directory</div>
+        <label htmlFor='files' className='disk-control__btn disk-control__upload-btn'>Add files<input onChange={(e)=>fileUploadHandler(e)} multiple type='file' id='files'/></label>
       </div>
       {isPopupDisplay && <Popup/>}
 

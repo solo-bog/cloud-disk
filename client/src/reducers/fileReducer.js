@@ -94,3 +94,15 @@ export const createDir = (dirName) => {
     }
   };
 };
+
+export const uploadFile = (file, dirId) => {
+  return async (dispatch) =>{
+    try {
+      const response = await filesAPI.uploadFile(file, dirId);
+      dispatch(addFile(response));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+

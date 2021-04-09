@@ -39,6 +39,24 @@ export const filesAPI = {
       headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
     }).then((response) => response.data);
   },
+  uploadFile(file, parent) {
+    const formData = new FormData();
+    formData.append('file', file);
+    if (parent) {
+      formData.append('parent', parent);
+    }
+    return instance.post('files/upload', formData, {
+      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+      onUploadProgress: (progressEvent) => {
+        const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+        console.log('total', totalLength);
+        if (totalLength) {
+          const progress = Math.round((progressEvent.loaded * 100) / totalLength);
+          console.log(progress);
+        }
+      },
+    }).then((response) => response.data);
+  },
 };
 
 

@@ -4,4 +4,12 @@
   &__header{
     text-align: center;
   }
+  &__drop-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: calc(100vh - 290px);
+    border: 1px dashed $primaryColor;
+  }
 }
