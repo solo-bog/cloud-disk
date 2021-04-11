@@ -73,17 +73,17 @@ class FileController {
       }
       file.mv(path);
       const type = file.name.split('.').pop();
-      let parentPath;
+      let filePath = file.name;
       let parentId;
       if (parent) {
-        parentPath = parent.path;
+        filePath = parent.path + '\\' + file.name;
         parentId = parent._id;
       }
       const dbFile = new File({
         name: file.name,
         type,
         size: file.size,
-        path: parentPath,
+        path: filePath,
         parent: parentId,
         user: user._id,
       });
@@ -93,6 +93,24 @@ class FileController {
     } catch (e) {
       console.log(e);
       return res.status(500).json({message: 'Upload error'});
+    }
+  }
+  /**
+   * @param {object} req - request
+   * @param {object} res - response
+   * @return {object} res - response with id created directory
+   */
+  async downloadFile(req, res) {
+    try {
+      const file = await File.findOne({_id: req.query.id, user: req.user.id});
+      const path = config.get('filePath') + '\\' + req.user.id + '\\' + file.path + '\\' + file.name;
+      if (fs.existsSync(path)) {
+        return res.download(path, file.name);
+      }
+      return res.status(400).json({message: 'Download error'});
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({message: 'Download error'});
     }
   }
 }

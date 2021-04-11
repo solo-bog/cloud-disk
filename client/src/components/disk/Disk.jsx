@@ -8,6 +8,7 @@ import Preloader from '../common/Preloader/Preloader';
 
 const Disk = () => {
   const currentDir = useSelector((state) => state.files.currentDir);
+  const currenrDirPath = useSelector((state) => state.files.dirPath);
   const dispatch = useDispatch();
   const [isFetching, setFetching] = useState(false);
   const [dragEnter, setDragEnter] = useState(false);
@@ -39,7 +40,7 @@ const Disk = () => {
   return (
     <div className='disk'>
       <div className="disk__header">
-        <h1>Videos</h1>
+        <span>{currenrDirPath.join('/')}</span>
       </div>
       <DiskControl/>
       {isFetching ? <Preloader/> :

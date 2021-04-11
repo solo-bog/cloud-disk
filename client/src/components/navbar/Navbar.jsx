@@ -1,6 +1,6 @@
 import React from 'react';
 import './navbar.scss';
-import logo from '../../assets/img/SOLO_CLOUD.svg';
+import logo from '../../assets/icons/SOLO_CLOUD.svg';
 import {NavLink} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../reducers/userReducer';

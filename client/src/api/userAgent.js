@@ -59,4 +59,22 @@ export const filesAPI = {
   },
 };
 
-
+export const downloadFile = async (file) => {
+  try {
+    const response = await instance.get(`files/download?id=${file._id}`, {
+      responseType: 'blob',
+      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+    });
+    console.log(response);
+    const blob = response.data;
+    const downloadLink = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = downloadLink;
+    link.download = file.name;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (e) {
+    console.log(e);
+  }
+};

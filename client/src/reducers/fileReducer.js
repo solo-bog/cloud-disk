@@ -105,4 +105,3 @@ export const uploadFile = (file, dirId) => {
     }
   };
 };
-

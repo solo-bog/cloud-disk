@@ -12,7 +12,6 @@ const FileList = (props) => {
       {viewType == 'list' &&
       <div className='file-list__header'>
         <div className='file-list__header_name'>Name</div>
-        <div className='file-list__header_type'>Type</div>
         <div className='file-list__header_date'>Date</div>
         <div className='file-list__header_size'>Size</div>
       </div>
