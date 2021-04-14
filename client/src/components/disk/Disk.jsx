@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadFiles, uploadFile} from '../../reducers/fileReducer';
+import {loadFiles} from '../../reducers/fileReducer';
 import './disk.scss';
 import DiskControl from './DiskControl/DiskControl';
 import FileList from './FileList/FileList';
 import Preloader from '../common/Preloader/Preloader';
+import Uploader from './Uploader/Uploader';
+import {uploadFile} from '../../reducers/uploadReducer';
 
 const Disk = () => {
   const currentDir = useSelector((state) => state.files.currentDir);
@@ -12,20 +14,19 @@ const Disk = () => {
   const dispatch = useDispatch();
   const [isFetching, setFetching] = useState(false);
   const [dragEnter, setDragEnter] = useState(false);
+  const [sort, setSort] = useState('name');
   useEffect(()=>{
     setFetching(true);
-    dispatch(loadFiles(currentDir)).then(()=>setFetching(false));
-  }, [currentDir]);
+    dispatch(loadFiles(currentDir, sort)).then(()=>setFetching(false));
+  }, [currentDir, sort]);
   const dragEnterHandler = (event) => {
     event.preventDefault();
     setDragEnter(true);
-    console.log('1');
   };
   const dragLeaveHandler = (event) => {
     event.preventDefault();
     event.stopPropagation();
     setDragEnter(false);
-    console.log('2');
   };
   const dropHandler = (event) => {
     event.preventDefault();
@@ -40,12 +41,13 @@ const Disk = () => {
   return (
     <div className='disk'>
       <div className="disk__header">
-        <span>{currenrDirPath.join('/')}</span>
+        <span onClick={()=>setVisibleUploadWindow(true)}>{currenrDirPath.join('/')}</span>
       </div>
-      <DiskControl/>
+      <DiskControl currentDir={currentDir} sort={sort} setSort={setSort}/>
       {isFetching ? <Preloader/> :
         !dragEnter ? <FileList onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}/> :
       <div className='disk__drop-area' onDrop={dropHandler} onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>Перетягніть сюди файли</div> }
+      <Uploader/>
     </div>
   );
 };

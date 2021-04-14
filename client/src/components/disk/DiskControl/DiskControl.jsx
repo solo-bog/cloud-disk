@@ -5,13 +5,13 @@ import listView from '../../../assets/icons/list_view.svg';
 import tableView from '../../../assets/icons/table_view.svg';
 import './diskControl.scss';
 import {useDispatch, useSelector} from 'react-redux';
-import {dirPop, setCurrentDir, setFilesView, setPopupDisplay, uploadFile} from '../../../reducers/fileReducer';
+import {dirPop, setCurrentDir, setFilesView, setPopupDisplay} from '../../../reducers/fileReducer';
 import Popup from './Popup/Popup';
+import {uploadFile} from '../../../reducers/uploadReducer';
 
-const DiskControl = () => {
+const DiskControl = ({sort, setSort, currentDir}) => {
   const dispatch = useDispatch();
   const isPopupDisplay = useSelector((state) => state.files.isPopupDisplay);
-  const currentDir = useSelector((state) => state.files.currentDir);
   const prevDir = useSelector((state) => state.files.dirStack[state.files.dirStack.length-1]);
   const openPrevDirHandler = () => {
     if (currentDir) {
@@ -35,7 +35,7 @@ const DiskControl = () => {
 
       <div className='disk-control__sort'>
         <label htmlFor="sort"><img className='disk-control__icon' src={sortIcon} alt="sort"/></label>
-        <select name="sort" id="sort">
+        <select name="sort" value={sort} onChange={(e)=>setSort(e.target.value)} id="sort">
           <option value="name" defaultValue>Name</option>
           <option value="size">Size</option>
           <option value="date">Date</option>

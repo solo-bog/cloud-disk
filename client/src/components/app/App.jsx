@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {Suspense, useEffect} from 'react';
 import Navbar from '../navbar/Navbar';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {Registration} from '../registration/Registration';
@@ -6,7 +6,7 @@ import './app.scss';
 import {Login} from '../login/Login';
 import {useDispatch, useSelector} from 'react-redux';
 import {auth} from '../../reducers/userReducer';
-import Disk from '../disk/Disk';
+const Disk = React.lazy(() => import('../disk/Disk'));
 import Preloader from '../common/Preloader/Preloader';
 const App = () => {
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -21,15 +21,19 @@ const App = () => {
               <div className='container'>
                 <main className="app__content">
                   {!isAuth ?
-                            <Switch>
-                              <Route path='/registration' component={Registration}/>
-                              <Route path='/login' component={Login}/>
-                              <Redirect to="/login"/>
-                            </Switch> :
-                            <Switch>
-                              <Route exact path='/' component={Disk}/>
-                              <Redirect exact to="/"/>
-                            </Switch>
+                    <Suspense fallback={<Preloader/>}>
+                      <Switch>
+                        <Route path='/registration' component={Registration}/>
+                        <Route path='/login' component={Login}/>
+                        <Redirect to="/login"/>
+                      </Switch>
+                    </Suspense> :
+                    <Suspense fallback={<Preloader/>}>
+                      <Switch>
+                        <Route exact path='/' component={Disk}/>
+                        <Redirect exact to="/"/>
+                      </Switch>
+                    </Suspense>
                   }
 
                 </main>

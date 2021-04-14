@@ -24,8 +24,18 @@ export const usersAPI = {
 };
 
 export const filesAPI = {
-  getFiles(dir) {
-    return instance.get(`files${dir?'?parent='+dir :''}`, {
+  getFiles(dir, sort) {
+    let url = `/files`;
+    if (dir) {
+      url = `files?parent=${dir}`;
+    }
+    if (sort) {
+      url = `files?sort=${sort}`;
+    }
+    if (dir && sort) {
+      url = `files?parent=${dir}&sort=${sort}`;
+    }
+    return instance.get(url, {
       headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
     })
         .then((response) => response.data);
@@ -39,7 +49,7 @@ export const filesAPI = {
       headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
     }).then((response) => response.data);
   },
-  uploadFile(file, parent) {
+  uploadFile(file, parent, onUploadProgressFunc) {
     const formData = new FormData();
     formData.append('file', file);
     if (parent) {
@@ -47,15 +57,14 @@ export const filesAPI = {
     }
     return instance.post('files/upload', formData, {
       headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
-      onUploadProgress: (progressEvent) => {
-        const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
-        console.log('total', totalLength);
-        if (totalLength) {
-          const progress = Math.round((progressEvent.loaded * 100) / totalLength);
-          console.log(progress);
-        }
-      },
+      onUploadProgress: onUploadProgressFunc,
     }).then((response) => response.data);
+  },
+  deleteFile(fileId) {
+    return instance.delete(`files?id=${fileId}`,
+        {
+          headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+        }).then((response) => response.data);
   },
 };
 
@@ -65,7 +74,6 @@ export const downloadFile = async (file) => {
       responseType: 'blob',
       headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
     });
-    console.log(response);
     const blob = response.data;
     const downloadLink = window.URL.createObjectURL(blob);
     const link = document.createElement('a');

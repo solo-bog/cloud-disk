@@ -3,7 +3,7 @@ import './file.scss';
 import dirLogo from '../../../../assets/icons/folder_icon.svg';
 import fileLogo from '../../../../assets/icons/file_icon.svg';
 import {useDispatch} from 'react-redux';
-import {dirPush, setCurrentDir} from '../../../../reducers/fileReducer';
+import {deleteFile, dirPush, setCurrentDir} from '../../../../reducers/fileReducer';
 import {byteConverter} from '../../../../utills/utills';
 import downloadIcon from '../../../../assets/icons/down-arrow.svg';
 import deleteIcon from '../../../../assets/icons/Vector 9.svg';
@@ -20,6 +20,9 @@ const File = ({file, viewType}) => {
     e.stopPropagation();
     downloadFile(file);
   };
+  const deleteClickHandler = (e) => {
+    dispatch(deleteFile(file._id));
+  };
   return (
     <div className='file'>
       <img src={file.type === 'dir' ? dirLogo : fileLogo} alt="" className="file__img" onClick={() => setCurrentDirHandler(file)}/>
@@ -32,7 +35,7 @@ const File = ({file, viewType}) => {
             </button>}
           </div>
           <div className="file__delete">
-            <button>
+            <button onClick={(e)=>deleteClickHandler(e)}>
               <img className='disk-control__icon' src={deleteIcon}/></button>
           </div>
           <div className="file__date">{file.date.slice(0, 10)}</div>

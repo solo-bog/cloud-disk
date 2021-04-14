@@ -21,17 +21,47 @@
       grid-column-start: 6;
     }
   }
-  &.table{
+  & .table{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     .file{
       display: block;
+      max-width: 100px;
       width: 33%;
       margin: 15px;
       border: none;
       text-align: center;
     }
   }
+}
 
+
+.file-enter-active{
+  animation: file-enter 500ms forwards;
+}
+.file-exit-active{
+  animation: file-exit 500ms forwards;
+}
+
+@keyframes file-enter {
+  0%{
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes file-exit {
+  0%{
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100%{
+    opacity: 0;
+    transform: translateX(-100%);
+  }
 }

@@ -1,0 +1,26 @@
+@import "../../../utills/theme/theme";
+.uploader{
+  width: 70%;
+  position: fixed;
+  bottom: 20px;
+  right: 15%;
+  background-color: $secondColor;
+  border: 2px solid $primaryColor;
+  border-radius: 10px;
+  &__header{
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__close-btn{
+    position: absolute;
+    font-size: 1.2rem;
+    right: 8px;
+    cursor: pointer;
+  }
+  &__file-list{
+    max-height: 270px;
+    overflow-y: auto;
+  }
+}

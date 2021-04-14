@@ -23,6 +23,24 @@ class FileService {
       }
     }));
   }
+  /**
+   * @param {object} file - file which will delete
+   */
+  deleteFile(file) {
+    const path = this.getPath(file);
+    if (file.type === 'dir') {
+      fs.rmdirSync(path);
+    } else {
+      fs.unlinkSync(path);
+    }
+  }
+  /**
+   * @param {object} file - file for which get path
+   * @return {string} - file path
+   */
+  getPath(file) {
+    return config.get('filePath') + '\\' + file.user + '\\' + file.path;
+  }
 }
 
 

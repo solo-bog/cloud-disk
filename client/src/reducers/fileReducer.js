@@ -8,6 +8,8 @@ const SET_POPUP_DISPLAY = 'SET_POPUP_DISPLAY';
 const ADD_FILE = 'ADD_FILE';
 const DIR_STACK_PUSH = 'DIR_STACK_PUSH';
 const DIR_STACK_POP = 'DIR_STACK_POP';
+const DELETE_FILE = 'DELETE_FILE';
+
 const defaultState = {
   files: [],
   currentDir: null,
@@ -57,22 +59,28 @@ export const fileReducer = (state=defaultState, action) => {
         dirStack: state.dirStack.slice(0, state.dirStack.length-1),
         dirPath: state.dirPath.slice(0, state.dirPath.length-1),
       };
+    case DELETE_FILE:
+      return {
+        ...state,
+        files: [...state.files.filter((item)=>item._id!==action.fileId)],
+      };
     default: return state;
   }
 };
 
 const setFiles = (files) =>({type: SET_FILES, payload: files});
-const addFile = (file) =>({type: ADD_FILE, file});
+export const addFile = (file) =>({type: ADD_FILE, file});
 export const setPopupDisplay = (display) =>({type: SET_POPUP_DISPLAY, display});
 export const setFilesView = (viewType) => ({type: SET_FILES_VIEW, viewType});
 export const setCurrentDir = (dir) =>({type: SET_CURRENT_DIR, payload: dir});
 export const dirPush = (dir, dirName) =>({type: DIR_STACK_PUSH, dir, dirName});
 export const dirPop = () =>({type: DIR_STACK_POP});
+const deleteFileAction = (fileId) =>({type: DELETE_FILE, fileId});
 
-export const loadFiles = (dirId) =>{
+export const loadFiles = (dirId, sort) =>{
   return async (dispatch) =>{
     try {
-      const response = await filesAPI.getFiles(dirId);
+      const response = await filesAPI.getFiles(dirId, sort);
       dispatch(setFiles(response));
     } catch (e) {
       console.log(e.response.data.message);
@@ -95,13 +103,15 @@ export const createDir = (dirName) => {
   };
 };
 
-export const uploadFile = (file, dirId) => {
+
+export const deleteFile = (fileId) => {
   return async (dispatch) =>{
     try {
-      const response = await filesAPI.uploadFile(file, dirId);
-      dispatch(addFile(response));
+      await filesAPI.deleteFile(fileId);
+      dispatch(deleteFileAction(fileId));
     } catch (e) {
       console.log(e);
+      alert(e.response.data.message);
     }
   };
 };
