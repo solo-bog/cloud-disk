@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {auth} from '../../reducers/userReducer';
 const Disk = React.lazy(() => import('../disk/Disk'));
 import Preloader from '../common/Preloader/Preloader';
+import Settings from '../settings/Settings';
 const App = () => {
   const isAuth = useSelector((state) => state.user.isAuth);
   const isInit = useSelector((state) =>state.user.isInit );
@@ -31,6 +32,7 @@ const App = () => {
                     <Suspense fallback={<Preloader/>}>
                       <Switch>
                         <Route exact path='/' component={Disk}/>
+                        <Route exact path='/settings' component={Settings}/>
                         <Redirect exact to="/"/>
                       </Switch>
                     </Suspense>

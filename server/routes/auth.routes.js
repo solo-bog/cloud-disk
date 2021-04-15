@@ -31,7 +31,8 @@ router.post('/registration',
         await user.save();
         await fileService.createDir(new File({user: user.id, name: ''}));
         const token = jwt.sign({id: user.id}, config.get('secretKey'), {expiresIn: '1h'});
-        return res.json({token,
+        return res.json({
+          token,
           user: {
             id: user.id,
             email: user.email,

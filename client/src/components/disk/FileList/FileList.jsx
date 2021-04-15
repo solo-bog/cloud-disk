@@ -16,6 +16,7 @@ const FileList = (props) => {
         <div className='file-list__header_size'>Size</div>
       </div>
       }
+      {files.length === 0 && <div className='file-list__message'>Empty directory</div>}
       <TransitionGroup className={viewType}>
         {files.map((item)=>
           <CSSTransition timeout={500} classNames='file' key={item._id}>

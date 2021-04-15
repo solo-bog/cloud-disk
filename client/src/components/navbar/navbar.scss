@@ -11,7 +11,7 @@
     position: relative;
     top: 5px;
   }
-  &__nav{
+  &__profile{
     span{
       color: $primaryColor;
       font-weight: bold;
@@ -19,17 +19,47 @@
         cursor: pointer;
       }
     }
-
-  }
-
-  &__nav{
     a{
       &:first-child{
         margin-right: 20px;
       }
     }
+
+  }
+  &__account{
+    display: flex;
+    align-items: center;
   }
 }
+
+.account{
+  &__actions{
+    position: relative;
+    a{
+      display: none;
+      width: 120px;
+      padding: 5px;
+      position: absolute;
+      border: 1px solid $primaryColor;
+      background: $bgColor;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      right: 0;
+      top: 100%;
+    }
+    img{
+      width:2.2rem;
+      height: 2.2rem;
+      margin-left: 10px;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+    &:hover  a{
+      display: block;
+    }
+  }
+}
+
 
 @media only screen and (max-width: 700px) {
   .header__logo{

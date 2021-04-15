@@ -115,3 +115,15 @@ export const deleteFile = (fileId) => {
     }
   };
 };
+
+export const searchFiles = (name) => {
+  return async (dispatch) =>{
+    try {
+      const response = await filesAPI.searchFiles(name);
+      dispatch(setFiles(response));
+    } catch (e) {
+      console.log(e);
+      alert(e.response.data.message);
+    }
+  };
+};

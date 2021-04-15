@@ -2,5 +2,6 @@
   "serverPort": 5000,
   "dbUrl": "mongodb+srv://test:test@cloud.6raeh.mongodb.net/cloud?retryWrites=true&w=majority",
   "secretKey": "mern-app-key",
-  "filePath": "C:\\Users\\bsolo\\Desktop\\Education\\WEB\\Projects\\MERN\\server\\files"
+  "filePath": "C:\\Users\\bsolo\\Desktop\\Education\\WEB\\Projects\\MERN\\server\\files",
+  "staticPath": "C:\\Users\\bsolo\\Desktop\\Education\\WEB\\Projects\\MERN\\server\\static"
 }

@@ -4,6 +4,7 @@ import {FORM_ERROR} from 'final-form';
 const SET_USER = 'SET_USER';
 const LOG_OUT = 'LOG_OUT';
 const TOGGLE_IS_INIT = 'TOGGLE_IS_INIT';
+
 const defaultState = {
   currentUser: {},
   isAuth: false,
@@ -13,11 +14,10 @@ const defaultState = {
 export const userReducer = (state=defaultState, action) => {
   switch (action.type) {
     case SET_USER:
-      localStorage.setItem('token', action.payload.token);
       return {
         ...state,
         isAuth: true,
-        currentUser: action.payload.user,
+        currentUser: action.payload,
       };
     case LOG_OUT:
       localStorage.removeItem('token');
@@ -47,7 +47,8 @@ export const login = (email, password) =>{
   return async (dispatch) => {
     try {
       const response = await usersAPI.login(email, password);
-      dispatch(setUser(response));
+      dispatch(setUser(response.user));
+      localStorage.setItem('token', response.token);
     } catch (e) {
       return {[FORM_ERROR]: e.response.data.message};
     }
@@ -58,7 +59,8 @@ export const registration = (email, password) =>{
   return async (dispatch) => {
     try {
       const response = await usersAPI.registration(email, password);
-      dispatch(setUser(response));
+      dispatch(setUser(response.user));
+      localStorage.setItem('token', response.token);
     } catch (e) {
       return {[FORM_ERROR]: e.response.data.message};
     }
@@ -69,13 +71,37 @@ export const auth = () =>{
   return async (dispatch)=>{
     try {
       const response = await usersAPI.auth();
-      dispatch(setUser(response));
+      dispatch(setUser(response.user));
       localStorage.setItem('token', response.token);
     } catch (e) {
       console.log(e);
       localStorage.removeItem('token');
     }
     dispatch(toggleIsInit(true));
+  };
+};
+
+export const uploadAvatar = (file) => {
+  return async (dispatch)=>{
+    try {
+      const response = await usersAPI.uploadAvatar(file);
+      dispatch(setUser(response));
+    } catch (e) {
+      console.log(e);
+      alert(e.response.message);
+    }
+  };
+};
+
+export const deleteAvatar = () => {
+  return async (dispatch)=>{
+    try {
+      const response = await usersAPI.deleteAvatar();
+      dispatch(setUser(response));
+    } catch (e) {
+      console.log(e);
+      alert(e.response.message);
+    }
   };
 };
 

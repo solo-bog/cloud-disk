@@ -21,6 +21,23 @@ export const usersAPI = {
         })
         .then((response) => response.data);
   },
+  uploadAvatar(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return instance.post(`files/avatar`,
+        formData,
+        {
+          headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+        })
+        .then((response) => response.data);
+  },
+  deleteAvatar() {
+    return instance.delete(`files/avatar`,
+        {
+          headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+        })
+        .then((response) => response.data);
+  },
 };
 
 export const filesAPI = {
@@ -66,6 +83,13 @@ export const filesAPI = {
           headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
         }).then((response) => response.data);
   },
+  searchFiles(name) {
+    return instance.get(`files/search?search=${name}`,
+        {
+          headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+        }).then((response) => response.data);
+  },
+
 };
 
 export const downloadFile = async (file) => {

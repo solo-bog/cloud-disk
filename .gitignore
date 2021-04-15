@@ -2,6 +2,8 @@ git init# See https://help.github.com/articles/ignoring-files/ for more about ig
 
 # dependencies
 /server/node_modules
+/server/files
+/server/static
 /client/node_modules
 /.pnp
 .pnp.js
