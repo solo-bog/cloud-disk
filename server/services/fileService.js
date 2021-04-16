@@ -9,7 +9,7 @@ class FileService {
    * @return {string} - result of work
    */
   createDir(file) {
-    const filePath = `${config.get('filePath')}\\${file.user}\\${file.path}`;
+    const filePath = this.getPath(file);
     return new Promise(((resolve, reject) => {
       try {
         if (!fs.existsSync(filePath)) {

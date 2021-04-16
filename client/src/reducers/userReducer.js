@@ -32,7 +32,6 @@ export const userReducer = (state=defaultState, action) => {
         isInit: action.value,
       };
 
-
     default:
       return state;
   }

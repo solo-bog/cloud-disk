@@ -29,33 +29,13 @@
   &__account{
     display: flex;
     align-items: center;
-  }
-}
-
-.account{
-  &__actions{
-    position: relative;
     a{
-      display: none;
-      width: 120px;
-      padding: 5px;
-      position: absolute;
-      border: 1px solid $primaryColor;
-      background: $bgColor;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      right: 0;
-      top: 100%;
-    }
-    img{
+      display: block;
       width:2.2rem;
       height: 2.2rem;
-      margin-left: 10px;
+      margin-left: 5px;
+      overflow: hidden;
       border-radius: 40px;
-      cursor: pointer;
-    }
-    &:hover  a{
-      display: block;
     }
   }
 }

@@ -63,7 +63,6 @@ const DiskControl = ({sort, setSort, currentDir}) => {
       <div className='disk-control__view'>
         <img className='disk-control__icon' onClick={() => dispatch(setFilesView('list'))} src={listView}/>
         <img className='disk-control__icon' onClick={() => dispatch(setFilesView('table'))} src={tableView}/>
-
       </div>
 
       <div className='disk-control__actions'>

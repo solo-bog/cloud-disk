@@ -10,7 +10,7 @@ const Navbar = () => {
   const isAuth = useSelector(((state) => state.user.isAuth));
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
-  const userAvatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : userImage;
+  const userAvatar = currentUser?.avatar ? `${API_URL + currentUser.avatar}` : userImage;
   return (
     <div className='header'>
       <div className='container'>
@@ -26,10 +26,7 @@ const Navbar = () => {
             {isAuth &&
               <div className='header__account'>
                 <span onClick={()=>dispatch(logout())} >Log out</span>
-                <div className='account__actions'>
-                  <img src={userAvatar} alt="avatar"/>
-                  <NavLink to="/settings">Change photo</NavLink>
-                </div>
+                <NavLink to="/settings"><img src={userAvatar} alt="avatar"/></NavLink>
               </div>}
           </div>
         </header>

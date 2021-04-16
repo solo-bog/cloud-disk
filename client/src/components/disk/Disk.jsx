@@ -41,12 +41,23 @@ const Disk = () => {
   return (
     <div className='disk'>
       <div className="disk__header">
-        <span onClick={()=>setVisibleUploadWindow(true)}>{currenrDirPath.join('/')}</span>
+        <span className='disk__breadcrumbs'>
+          {currenrDirPath.join('/')}
+        </span>
       </div>
       <DiskControl currentDir={currentDir} sort={sort} setSort={setSort}/>
-      {isFetching ? <Preloader/> :
-        !dragEnter ? <FileList onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}/> :
-      <div className='disk__drop-area' onDrop={dropHandler} onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>Перетягніть сюди файли</div> }
+      {isFetching ?
+        <Preloader/> :
+        !dragEnter ?
+          <FileList
+            onDragEnter={dragEnterHandler}
+            onDragLeave={dragLeaveHandler}
+            onDragOver={dragEnterHandler}/> :
+          <div className='disk__drop-area'
+            onDrop={dropHandler}
+            onDragEnter={dragEnterHandler}
+            onDragLeave={dragLeaveHandler}
+            onDragOver={dragEnterHandler}>Drag and drop files here</div> }
       <Uploader/>
     </div>
   );
