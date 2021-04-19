@@ -1,0 +1,31 @@
+@import "../../utills/theme/theme";
+
+.form{
+  width: 60%;
+  margin: 150px auto 0 auto;
+  padding: 25px;
+  background-color: $secondColor;
+  border-radius: 27px;
+  h1{
+    margin: 0;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__field{
+    margin:10px 0;
+  }
+  &__submit-error{
+    color: red;
+  }
+  &__button{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .form{
+    width: 85%;
+  }
+}

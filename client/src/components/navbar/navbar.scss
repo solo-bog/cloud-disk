@@ -1,0 +1,48 @@
+@import "../../utills/theme/theme";
+.header{
+  background-color: $secondColor;
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+  &__logo{
+    position: relative;
+    top: 5px;
+  }
+  &__profile{
+    span{
+      color: $primaryColor;
+      font-weight: bold;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+    a{
+      &:first-child{
+        margin-right: 20px;
+      }
+    }
+
+  }
+  &__account{
+    display: flex;
+    align-items: center;
+    a{
+      display: block;
+      width:2.2rem;
+      height: 2.2rem;
+      margin-left: 5px;
+      overflow: hidden;
+      border-radius: 40px;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 700px) {
+  .header__logo{
+    flex-basis: 50%;
+  }
+}

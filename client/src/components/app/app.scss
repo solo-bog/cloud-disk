@@ -1,0 +1,9 @@
+@import "../../utills/theme/theme";
+@import "./general";
+
+
+.app{
+  &__content{
+    min-height: calc(100vh - 70px);
+  }
+}

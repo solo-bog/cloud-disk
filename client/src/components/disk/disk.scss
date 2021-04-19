@@ -1,0 +1,21 @@
+@import "../../utills/theme/theme";
+
+.disk{
+  &__header{
+    display: flex;
+    margin: 0.5rem 0;
+  }
+  &__drop-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: calc(100vh - 290px);
+    border: 1px dashed $primaryColor;
+  }
+  &__breadcrumbs{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

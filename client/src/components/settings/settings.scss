@@ -1,0 +1,34 @@
+@import "../../utills/theme/theme";
+.settings{
+  &__user-photo{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 2rem ;
+    img{
+      width: auto;
+      height: 200px;
+    }
+  }
+  &__buttons{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+  &__btn{
+    padding: 0.5rem;
+    background-color: $primaryColor;
+    color: $secondColor;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    input{
+      display: none;
+    }
+    &:nth-child(2){
+      margin-left: 10px;
+    }
+  }
+}

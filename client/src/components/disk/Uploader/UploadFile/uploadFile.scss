@@ -1,0 +1,23 @@
+@import '../../../../utills/theme/theme';
+
+.upload-file{
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  padding: 0 10px;
+  background-color:$bgColor;
+  &__name{
+    width: 35%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+  }
+  progress{
+    width: 50%;
+    margin: 0 10px;
+  }
+  &__close{
+    cursor: pointer;
+  }
+}

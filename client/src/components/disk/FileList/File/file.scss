@@ -1,0 +1,57 @@
+@import "../../../../utills/theme/theme";
+.file {
+  padding: 5px 0;
+  border-bottom: solid 2px $primaryColor;
+  display: grid;
+  grid-template-columns: 1fr 3fr repeat(2,1fr) 2fr 1fr;
+  align-items: center;
+  &:hover {
+    transform: scale(0.99);
+    cursor: pointer;
+    button{
+      display: block;
+    }
+  }
+  &__img {
+    width: 60px;
+    justify-self: center;
+
+    @media only screen and (max-width: 480px) {
+     width: 30px;
+    }
+  }
+  &__name{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  &__type {
+    grid-column-start: 4;
+    justify-self: center;
+  }
+  &__date {
+    grid-column-start: 5;
+    justify-self: center;
+  }
+  &__size {
+    grid-column-start: 6;
+    justify-self: center;
+    text-align: center;
+  }
+  &__download{
+    grid-column-start: 3;
+  }
+  button{
+    display: none;
+    background-color: inherit;
+    padding: 0.4rem 1.2rem;
+    margin: 3px;
+    border: 1px solid $primaryColor;
+    border-radius: 37px;
+    cursor: pointer;
+  }
+}
+
+
+
+
